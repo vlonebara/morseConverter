@@ -3,6 +3,7 @@ package server
 import (
 	"log"
 	"net/http"
+	"time" // Добавьте этот импорт
 
 	"github.com/Yandex-Practicum/go1fl-sprint6-final/internal/handlers"
 )
@@ -13,7 +14,7 @@ type Server struct {
 }
 
 // Создает роутер
-func CreateRoter(logger *log.Logger) *Server {
+func CreateRouter(logger *log.Logger) *Server {
 	router := http.NewServeMux()
 
 	router.HandleFunc("/", handlers.IndexHandler)
@@ -23,13 +24,18 @@ func CreateRoter(logger *log.Logger) *Server {
 		Addr:         ":8080",
 		Handler:      router,
 		ErrorLog:     logger,
-		ReadTimeout:  5,
-		WriteTimeout: 10,
-		IdleTimeout:  15,
+		ReadTimeout:  5 * time.Second,  // Исправлено: добавлен time.Second
+		WriteTimeout: 10 * time.Second, // Исправлено: добавлен time.Second
+		IdleTimeout:  15 * time.Second, // Исправлено: добавлен time.Second
 	}
 
 	return &Server{
 		Logger: logger,
 		HTTP:   httpServer,
 	}
+}
+
+func (s *Server) Start() error {
+	s.Logger.Printf("Запуск сервера на порту 8080...")
+	return s.HTTP.ListenAndServe()
 }

@@ -2,7 +2,6 @@ package handlers
 
 import (
 	"fmt"
-	"html/template"
 	"io"
 	"net/http"
 	"os"
@@ -15,22 +14,7 @@ import (
 
 // Возвращает HTML из файла index.html
 func IndexHandler(w http.ResponseWriter, r *http.Request) {
-	if r.URL.Path != "/" {
-		http.NotFound(w, r)
-		return
-	}
-
-	tmpl, err := template.ParseFiles("index.html")
-	if err != nil {
-		http.Error(w, "[handlers.IndexHandler] Не удалось загрузить страницу", http.StatusInternalServerError)
-		return
-	}
-
-	w.Header().Set("Content-Type", "text/html; charset=utf-8")
-	if err := tmpl.Execute(w, nil); err != nil {
-		http.Error(w, "[handlers.IndexHandler] Ошибка при рендеринге страницы", http.StatusInternalServerError)
-		return
-	}
+	http.ServeFile(w, r, "index.html")
 }
 
 // Обрабатывает загрузку файлов и конвертацию
