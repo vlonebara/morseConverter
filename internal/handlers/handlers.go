@@ -9,12 +9,12 @@ import (
 	"strings"
 	"time"
 
-	"github.com/Yandex-Practicum/go1fl-sprint6-final/internal/service"
+	"github.com/vlonebara/morseConverter/internal/service"
 )
 
 // Возвращает HTML из файла index.html
 func IndexHandler(w http.ResponseWriter, r *http.Request) {
-	http.ServeFile(w, r, "index.html")
+	http.ServeFile(w, r, "web/index.html")
 }
 
 // Обрабатывает загрузку файлов и конвертацию

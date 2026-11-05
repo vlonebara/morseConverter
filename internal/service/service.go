@@ -4,7 +4,7 @@ import (
 	"errors"
 	"strings"
 
-	"github.com/Yandex-Practicum/go1fl-sprint6-final/pkg/morse"
+	"github.com/vlonebara/morseConverter/pkg/morse"
 )
 
 // Определяет тип входной строки и конвертирует ее

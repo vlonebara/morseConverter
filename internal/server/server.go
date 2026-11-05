@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"time" // Добавьте этот импорт
 
-	"github.com/Yandex-Practicum/go1fl-sprint6-final/internal/handlers"
+	"github.com/vlonebara/morseConverter/internal/handlers"
 )
 
 type Server struct {
